@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Checks whether the constraints satisfied or not\n#' @param route -- Sequence of nodes (Ex: 5 4 3 8)\n#' @param common_node -- One of the existing node of the route and it shouldn't be an interior of the route (Interior of route: nodes, which have both left and right edge, ex: 3, 4 in above route) (Ex: 5)\n#' @param new_node -- New node to be included to the route (Ex: 9)\n#' @param Constraints -- List of constraints to check. Currently implemented only vehicle capacity constraint\n#' @examples\n#' route <- c(5, 4, 3, 8)\n#' common_node <- 5\n#' new_node <- 9\n#' Vehicle_Capacity <- 100\n#' data(An32k5demand)\n#' demand <- An32k5demand\n#' const <- c(\"Capacity\")\n#' CheckConstraints(route, common_node, new_node, Constraints = const)\n#' @export\n\nCheckConstraints <- function(route, common_node, new_node, Constraints = c(\"Capacity\")){\n  new_route <- Connect_Edges(route, common_node, new_node)\n  Filled <- FALSE\n  if(\"Capacity\" %in% Constraints){\n    if(!exists(\"Vehicle_Capacity\")){\n      stop(\"Please define vehicle capacity as a global param (Ex: Vehicle_Capacity <<- 100)\")\n    }else{\n      route_demand <- sum(demand[demand[, 1] %in% new_route, 2])\n      Filled <- ifelse(route_demand > min(demand[, 2]), TRUE, FALSE)\n      if(route_demand < Vehicle_Capacity)\n        flag_capacity <- TRUE\n      else\n        return(list(Satisfied = FALSE, Filled = Filled))\n    }\n  }\n  return(list(Satisfied = TRUE, Filled = Filled))\n}",
+    "created" : 1485060927191.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4039769518",
+    "id" : "7753BE5D",
+    "lastKnownWriteTime" : 1485085548,
+    "last_content_update" : 1485085548890,
+    "path" : "~/Clarke_Wright_Savings_Algo/R/CheckConstraints.R",
+    "project_path" : "R/CheckConstraints.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

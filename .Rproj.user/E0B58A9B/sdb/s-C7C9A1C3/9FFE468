@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Coomputes distance matrix\n#' @param locations -- [ID, X, Y] Node id and X, Y co-ordinates/ Long, Lat\n#' @param method -- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c(\"euclidean\", \"maximum\", \"manhattan\", \"canberra\", \"binary\" or \"minkowski\"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: \"euclidean\". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat\n#' @examples\n#' data(An32k5locations)\n#' DistMat(An32k5locations)\n#' @export\n\nDistMat <- function(locations, method = \"euclidean\"){\n  # locations -- [ID, X, Y] Node id and X, Y co-ordinates\n  # method = \"euclidean\"\n  if(method %in% c(\"euclidean\", \"maximum\", \"manhattan\", \"canberra\", \"binary\", \"minkowski\")){\n    DMat <- dist(locations[, -1], method = method, diag = TRUE, upper = TRUE)\n  }else if(method %in% c(\"distCosine\", \"distHaversine\")){\n    DMat <- dist(locations[, -1], method = method, diag = TRUE, upper = TRUE)\n  }\n  DMat <- as.matrix(DMat)\n  row.names(DMat) <- locations[, 1]\n  colnames(DMat) <- locations[, 1]\n  return(DMat)\n}",
+    "created" : 1485061836722.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3574461378",
+    "id" : "9FFE468",
+    "lastKnownWriteTime" : 1485085650,
+    "last_content_update" : 1485085650193,
+    "path" : "~/Clarke_Wright_Savings_Algo/R/DistMat.R",
+    "project_path" : "R/DistMat.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,61 @@
+#' Implements Clarke-Wright Savings algorithm to find greedy routes
+#' @param locations -- [ID, X, Y] Node id and X, Y co-ordinates/long, lat 
+#' @param demand -- Demand at each node [ID, Demand]
+#' @param DMat -- Provide distance matrix, if you already have computed. Make sure that first row and column of the distance matrix represents distances from depot to all the nodes
+#' @param Vehicle_Capacity -- Vehicle capacity
+#' #' @param method -- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c("euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: "euclidean". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat
+#' @param Constraints -- List of constraints to check. Currently implemented only vehicle capacity constraint
+#' @param type -- Type of savings algorithm. Possible values ("Parallel", "Sequential"). If you want to build more than one route then we strong recommend you to use "Parallel", "Sequential" algorithm may end up with infeasible nodes for more than one route. For building one route (assumes infinite vehilce capacity) go for "Sequential"
+#' @param Plot -- If you want to plot the final greedy routes. Logical (TRUE or FALSE). Default: TRUE
+#' @param logfile -- If you want to save all routes in each iteration. Logical (TRUE or FALSE). Check "Results.txt" or "Results_Seq.txt" in your working directory. Default: TRUE
+#' @examples
+#' data(An32k5locations)
+#' locations <- An32k5locations
+#' DMat <- DistMat(locations)
+#' row.names(DMat) <- locations[, 1]
+#' colnames(DMat) <- locations[, 1]
+#' data(An32k5demand)
+#' demand <- An32k5demand
+#' Vehicle_Capacity <- 100
+#' CW_VRP(demand, DMat = DMat, Vehicle_Capacity = Vehicle_Capacity)
+#' @references 
+#' [1] Classical Heuristics for Vehicle Routing Problem by Gilbert Laporte and Frederic Semet, October, 1998 (Revised: August, 1999), Les Cahiers du Gerad
+#' @importFrom graphics plot
+#' @import ggplot2
+#' @importFrom ggplot2 ggplot aes geom_path labs annotate
+#' @importFrom stats dist
+#' @importFrom utils capture.output
+#' @export
+
+CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
+  if(is.null(locations) & is.null(DMat))
+    stop("Please provide either of distance matrix and locations")
+  if(is.null(DMat)) {
+    DMat <- DistMat(locations)
+    nnodes <- nrow(locations) - 1
+  }else{
+    Plot <- FALSE
+    nnodes <- nrow(DMat) - 1
+  }
+  SMat <- SavingMat(DMat, 1)
+  Sort_Edge <- Sorted_Edges(DMat)
+  Sort_Edge$i <- as.integer(as.character(Sort_Edge$i))
+  Sort_Edge$j <- as.integer(as.character(Sort_Edge$j))
+  Sort_Edge$Saving <- as.numeric(Sort_Edge$Saving)
+  if(type == "Parallel"){
+    Greedy_Routes <- CW_Parallel_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile)
+  }else if(type == "Sequential"){
+    Greedy_Routes <- CW_Sequential_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile)
+  }
+  cat("Total cost: ", Total_Cost(Greedy_Routes), "\n")
+  
+  for(i in 1:length(Greedy_Routes)){
+    Greedy_Routes[[i]] <- c(1, Greedy_Routes[[i]], 1)
+  }
+  
+  if(Plot == TRUE){
+    g <- ggplot(locations[unlist(Greedy_Routes), ], aes_string(x = names(locations)[2], y = names(locations)[3])) + geom_path(lineend = "round", linetype = 2, show.legend = TRUE) + labs(title = "Plot of Greedy Routes") + annotate("text", x = locations[, 2], y = locations[, 3], label = locations[, 1])
+    plot(g)
+  }
+  return(Greedy_Routes)
+}

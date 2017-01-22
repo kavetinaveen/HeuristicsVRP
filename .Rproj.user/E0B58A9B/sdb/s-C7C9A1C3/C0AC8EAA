@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' To compute savings matrix\n#' @param DMat -- Distance matrix, assuming first row and column represents distance from depot\n#' depot = 1 by default (fixed)\n#' @examples\n#' data(An32k5locations)\n#' DMat <- DistMat(An32k5locations)\n#' row.names(DMat) <- An32k5locations[, 1]\n#' colnames(DMat) <- An32k5locations[, 1]\n#' SavingMat(DMat)\n#' @export\n\nSavingMat <- function(DMat, depot = 1){\n  SMat <- matrix(0, nrow = nrow(DMat) - 1, ncol = nrow(DMat) - 1)\n  row.names(SMat) <- setdiff(row.names(DMat), as.character(depot))\n  colnames(SMat) <- setdiff(row.names(DMat), as.character(depot))\n  for(i in row.names(SMat)){\n    for(j in colnames(SMat)){\n      if(as.numeric(i) < as.numeric(j)){\n        SMat[i, j] = DMat[depot, i] + DMat[depot, j] - DMat[i, j]\n      }\n    }\n  }\n  return(SMat)\n}",
+    "created" : 1485064942129.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1551702727",
+    "id" : "C0AC8EAA",
+    "lastKnownWriteTime" : 1485085721,
+    "last_content_update" : 1485085721999,
+    "path" : "~/Clarke_Wright_Savings_Algo/R/SavingMat.R",
+    "project_path" : "R/SavingMat.R",
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

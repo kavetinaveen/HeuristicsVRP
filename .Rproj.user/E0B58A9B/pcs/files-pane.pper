@@ -1,0 +1,9 @@
+{
+    "path" : "~/Clarke_Wright_Savings_Algo/data",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

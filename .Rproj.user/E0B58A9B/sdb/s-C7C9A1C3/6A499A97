@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' To find an index of the sorted edges, in which a common node between routes and existing routes exists. (Only for Sequential approach, internal purpose)\n#' @param Sort_Edge -- Edges sorted in a decreasing order of their savings\n#' @param Served_nodes -- List of nodes already serviced \n\nFind_Ind_Common_Edge <- function(Sort_Edge, Served_nodes){\n  for(i in 1:nrow(Sort_Edge)){\n    if(length(intersect(c(Sort_Edge[i, 1], Sort_Edge[i, 2]), Served_nodes)) > 0) return(i)\n  }\n  return(0)\n}",
+    "created" : 1485064448014.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "325855084",
+    "id" : "6A499A97",
+    "lastKnownWriteTime" : 1485064939,
+    "last_content_update" : 1485064939940,
+    "path" : "~/Clarke_Wright_Savings_Algo/R/Find_Index_Common_Edge.R",
+    "project_path" : "R/Find_Index_Common_Edge.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
