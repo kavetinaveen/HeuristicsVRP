@@ -10,7 +10,7 @@
 #' demand <- An32k5demand
 #' Vehicle_Capacity <- 100
 #' result <- CW_VRP(demand, DMat = DMat, Vehicle_Capacity = Vehicle_Capacity)
-#' Total_Cost(result)
+#' Total_Cost(result, DMat)
 #' @export
 
 Total_Cost <- function(result, DMat){

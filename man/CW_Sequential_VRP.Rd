@@ -5,7 +5,7 @@
 \title{Performs Clarke-Wright Savings algorithm in Sequential}
 \usage{
 CW_Sequential_VRP(Sort_Edge, nnodes, routes = list(), Served_nodes = c(),
-  Filled_Routes = c(), logfile = TRUE)
+  Filled_Routes = c(), logfile = TRUE, Constraints = c("Capacity"))
 }
 \arguments{
 \item{Sort_Edge}{-- Edges sorted in a decreasing order with respect to savings}

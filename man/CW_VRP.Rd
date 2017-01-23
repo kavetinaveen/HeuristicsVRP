@@ -4,9 +4,10 @@
 \alias{CW_VRP}
 \title{Implements Clarke-Wright Savings algorithm to find greedy routes}
 \usage{
-CW_VRP(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL,
-  method = "euclidean", Constraints = c("Capacity"), type = "Parallel",
-  Plot = TRUE, logfile = TRUE)
+CW_VRP(demand = NULL, locations = NULL, DMat = NULL,
+  Vehicle_Capacity = NULL, method = "euclidean",
+  Constraints = c("Capacity"), type = "Parallel", Plot = TRUE,
+  logfile = TRUE)
 }
 \arguments{
 \item{demand}{-- Demand at each node [ID, Demand]}

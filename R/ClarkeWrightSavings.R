@@ -27,13 +27,22 @@
 #' @importFrom utils capture.output
 #' @export
 
-CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
+CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
+  strt <- Sys.time()
   demand <<- demand
   Vehicle_Capacity <<- Vehicle_Capacity
+  locations <<- locations
+  
   if(is.null(locations) & is.null(DMat))
     stop("Please provide either of distance matrix and locations")
-  if(is.null(DMat)) {
-    locations <<- locations
+  
+  if(is.null(demand) & "Capacity" %in% Constraints){
+    warning("Demand values are not available so neglecting vehicle capacity constraint")
+    Constraints <- setdiff(Constraints, "Capacity")
+  }
+  
+  if(is.null(DMat)){
+    # idmap <- data.frame(OID = locations[,1], MID = c(1:nrow(locations)))
     DMat <- DistMat(locations)
     nnodes <- nrow(locations) - 1
   }else{
@@ -46,9 +55,9 @@ CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NUL
   Sort_Edge$j <- as.integer(as.character(Sort_Edge$j))
   Sort_Edge$Saving <- as.numeric(Sort_Edge$Saving)
   if(type == "Parallel"){
-    Greedy_Routes <- CW_Parallel_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile)
+    Greedy_Routes <- CW_Parallel_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile, Constraints = Constraints)
   }else if(type == "Sequential"){
-    Greedy_Routes <- CW_Sequential_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile)
+    Greedy_Routes <- CW_Sequential_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile, Constraints = Constraints)
   }
   
   for(i in 1:length(Greedy_Routes)){
@@ -61,5 +70,6 @@ CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NUL
     g <- ggplot(locations[unlist(Greedy_Routes), ], aes_string(x = names(locations)[2], y = names(locations)[3])) + geom_path(lineend = "round", linetype = 2, show.legend = TRUE) + labs(title = "Plot of Greedy Routes") + annotate("text", x = locations[, 2], y = locations[, 3], label = locations[, 1])
     plot(g)
   }
+  cat("Total time taken: ", Sys.time() - strt,"\n")
   return(Greedy_Routes)
 }
