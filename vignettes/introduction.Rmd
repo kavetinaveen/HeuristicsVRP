@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Heuristic Algorithms for VRP"
+author: "Naveen Kaveti"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,15 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+We all know about the complexity of VRP algorithms. Getting global optimal routes for a VRP problem is almost impossible even for a smaller number of customer nodes. Even if it is possible we may need to wait for hours to get a global optimal solutions and this may not be possible for most of the business problems. Some time business may require real-time better routes (may not be optimal routes) to service their customers as early as possible. Objective of this package is to implement heuristic algorithms to find greedy routes in almost real-time. Currently implemented Clarke-Wright Savings algorithm, both parallel and sequential methods for CVRP (Capacitated Vehicle Routing Problem). I am planning to implement more features into the problem (like, time-window, backhauls and etc) and more greedy approaches, if possible.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+## Clarke-Wright Savings Algorithm
 
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+Clarke-Wright Savings is one of the most famous algorithm for VRP problems. The key feature of this algorithm is very less computational time.
 
 ## Styles
 

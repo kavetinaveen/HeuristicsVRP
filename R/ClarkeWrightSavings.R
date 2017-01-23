@@ -28,9 +28,12 @@
 #' @export
 
 CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
+  demand <<- demand
+  Vehicle_Capacity <<- Vehicle_Capacity
   if(is.null(locations) & is.null(DMat))
     stop("Please provide either of distance matrix and locations")
   if(is.null(DMat)) {
+    locations <<- locations
     DMat <- DistMat(locations)
     nnodes <- nrow(locations) - 1
   }else{
@@ -47,11 +50,12 @@ CW_VRP <- function(demand, locations = NULL, DMat = NULL, Vehicle_Capacity = NUL
   }else if(type == "Sequential"){
     Greedy_Routes <- CW_Sequential_VRP(Sort_Edge, nnodes = nnodes, logfile = logfile)
   }
-  cat("Total cost: ", Total_Cost(Greedy_Routes), "\n")
   
   for(i in 1:length(Greedy_Routes)){
     Greedy_Routes[[i]] <- c(1, Greedy_Routes[[i]], 1)
   }
+  
+  cat("Total cost: ", Total_Cost(Greedy_Routes, DMat), "\n")
   
   if(Plot == TRUE){
     g <- ggplot(locations[unlist(Greedy_Routes), ], aes_string(x = names(locations)[2], y = names(locations)[3])) + geom_path(lineend = "round", linetype = 2, show.legend = TRUE) + labs(title = "Plot of Greedy Routes") + annotate("text", x = locations[, 2], y = locations[, 3], label = locations[, 1])

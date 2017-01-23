@@ -10,11 +10,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Vignette Author" />
+<meta name="author" content="Naveen Kaveti" />
 
-<meta name="date" content="2017-01-22" />
+<meta name="date" content="2017-01-23" />
 
-<title>Vignette Title</title>
+<title>Heuristic Algorithms for VRP</title>
 
 
 
@@ -68,21 +68,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Vignette Title</h1>
-<h4 class="author"><em>Vignette Author</em></h4>
-<h4 class="date"><em>2017-01-22</em></h4>
+<h1 class="title toc-ignore">Heuristic Algorithms for VRP</h1>
+<h4 class="author"><em>Naveen Kaveti</em></h4>
+<h4 class="date"><em>2017-01-23</em></h4>
 
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<ul>
-<li>Never uses retina figures</li>
-<li>Has a smaller default figure size</li>
-<li>Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style</li>
-</ul>
-<div id="vignette-info" class="section level2">
-<h2>Vignette Info</h2>
-<p>Note the various macros within the <code>vignette</code> section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
+<p>We all know about the complexity of VRP algorithms. Getting global optimal routes for a VRP problem is almost impossible even for a smaller number of customer nodes. Even if it is possible we may need to wait for hours to get a global optimal solutions and this may not be possible for most of the business problems. Some time business may require real-time better routes (may not be optimal routes) to service their customers as early as possible. Objective of this package is to implement heuristic algorithms to find greedy routes in almost real-time. Currently implemented Clarke-Wright Savings algorithm, both parallel and sequential methods for CVRP (Capacitated Vehicle Routing Problem). I am planning to implement more features into the problem (like, time-window, backhauls and etc) and more greedy approaches, if possible.</p>
+<div id="clarke-wright-savings-algorithm" class="section level2">
+<h2>Clarke-Wright Savings Algorithm</h2>
+<p>Clarke-Wright Savings is one of the most famous algorithm for VRP problems. The key feature of this algorithm is very less computational time.</p>
 </div>
 <div id="styles" class="section level2">
 <h2>Styles</h2>

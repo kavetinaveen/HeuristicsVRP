@@ -13,10 +13,9 @@
 #' Total_Cost(result)
 #' @export
 
-Total_Cost <- function(result){
+Total_Cost <- function(result, DMat){
   cost <- 0
   for(i in 1:length(result)){
-    cost <- cost + DMat[1, result[[i]][1]] + DMat[result[[i]][length(result[[i]])], 1]
     for(j in 1:(length(result[[i]]) - 1)){
       cost <- cost + DMat[result[[i]][j], result[[i]][j+1]]
     }

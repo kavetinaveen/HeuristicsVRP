@@ -4,7 +4,7 @@
 \alias{Total_Cost}
 \title{To compute total cost of the routes}
 \usage{
-Total_Cost(result)
+Total_Cost(result, DMat)
 }
 \arguments{
 \item{result}{-- List of routes}
