@@ -3,7 +3,7 @@
 #' @param demand -- Demand at each node [ID, Demand]
 #' @param DMat -- Provide distance matrix, if you already have computed. Make sure that first row and column of the distance matrix represents distances from depot to all the nodes
 #' @param Vehicle_Capacity -- Vehicle capacity
-#' #' @param method -- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c("euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: "euclidean". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat
+#' @param method -- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c("euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: "euclidean". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat
 #' @param Constraints -- List of constraints to check. Currently implemented only vehicle capacity constraint
 #' @param type -- Type of savings algorithm. Possible values ("Parallel", "Sequential"). If you want to build more than one route then we strong recommend you to use "Parallel", "Sequential" algorithm may end up with infeasible nodes for more than one route. For building one route (assumes infinite vehilce capacity) go for "Sequential"
 #' @param Plot -- If you want to plot the final greedy routes. Logical (TRUE or FALSE). Default: TRUE
@@ -17,7 +17,7 @@
 #' data(An32k5demand)
 #' demand <- An32k5demand
 #' Vehicle_Capacity <- 100
-#' CW_VRP(demand, DMat = DMat, Vehicle_Capacity = Vehicle_Capacity)
+#' CW_VRP(demand = demand, locations = locations, Vehicle_Capacity = Vehicle_Capacity)
 #' @references 
 #' [1] Classical Heuristics for Vehicle Routing Problem by Gilbert Laporte and Frederic Semet, October, 1998 (Revised: August, 1999), Les Cahiers du Gerad
 #' @importFrom graphics plot
@@ -28,6 +28,7 @@
 #' @export
 
 CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
+  options(expressions = 10000)
   strt <- Sys.time()
   demand <<- demand
   Vehicle_Capacity <<- Vehicle_Capacity
