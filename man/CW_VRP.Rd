@@ -16,8 +16,9 @@ CW_VRP(demand = NULL, locations = NULL, DMat = NULL,
 
 \item{DMat}{-- Provide distance matrix, if you already have computed. Make sure that first row and column of the distance matrix represents distances from depot to all the nodes}
 
-\item{Vehicle_Capacity}{-- Vehicle capacity
-#' @param method -- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c("euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: "euclidean". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat}
+\item{Vehicle_Capacity}{-- Vehicle capacity}
+
+\item{method}{-- Metric to calculate distnace between nodes. Feasible methods for X-Y co-ordinates c("euclidean", "maximum", "manhattan", "canberra", "binary" or "minkowski"); Feasible methods for Long-Lat c(distCosine, distHaversine). Default: "euclidean". Note: Please make sure that, method should be a character only for X-Y co-ordinates not for Long-Lat}
 
 \item{Constraints}{-- List of constraints to check. Currently implemented only vehicle capacity constraint}
 
@@ -39,7 +40,7 @@ colnames(DMat) <- locations[, 1]
 data(An32k5demand)
 demand <- An32k5demand
 Vehicle_Capacity <- 100
-CW_VRP(demand, DMat = DMat, Vehicle_Capacity = Vehicle_Capacity)
+CW_VRP(demand = demand, locations = locations, Vehicle_Capacity = Vehicle_Capacity)
 }
 \references{
 [1] Classical Heuristics for Vehicle Routing Problem by Gilbert Laporte and Frederic Semet, October, 1998 (Revised: August, 1999), Les Cahiers du Gerad
