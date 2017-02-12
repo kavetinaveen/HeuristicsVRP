@@ -11,7 +11,6 @@ Description: Objective of this package is to provide better (not optimal) routes
 License: GPL-2
 Depends: ggplot2, geosphere, R (>= 3.3.0)
 RoxygenNote: 5.0.1
-Suggests: knitr,
-    rmarkdown
+Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 LazyData: true

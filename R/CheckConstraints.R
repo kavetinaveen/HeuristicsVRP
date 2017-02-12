@@ -14,12 +14,12 @@
 #' CheckConstraints(route, common_node, new_node, Constraints = const)
 #' @export
 
-CheckConstraints <- function(route, common_node, new_node, Constraints = c("Capacity")){
+CheckConstraints <- function(route, common_node, new_node, demand, Vehicle_Capacity, Constraints = c("Capacity")){
   new_route <- Connect_Edges(route, common_node, new_node)
   Filled <- FALSE
   if("Capacity" %in% Constraints){
-    if(!exists("Vehicle_Capacity")){
-      stop("Please define vehicle capacity as a global param (Ex: Vehicle_Capacity <<- 100)")
+    if(!exists("Vehicle_Capacity") | is.null(Vehicle_Capacity)){
+      stop("Please specify vehicle capacity")
     }else{
       route_demand <- sum(demand[demand[, 1] %in% new_route, 2])
       Filled <- ifelse(route_demand > min(demand[, 2]), TRUE, FALSE)

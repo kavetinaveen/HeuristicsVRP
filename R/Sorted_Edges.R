@@ -13,6 +13,8 @@ Sorted_Edges <- function(DMat){
   SMat <- SavingMat(DMat, depot = 1)
   result <- as.data.frame.table(SMat)
   colnames(result) <- c("i", "j", "Saving")
+  result$i <- as.character(result$i)
+  result$j <- as.character(result$j)
   result <- result[result$Saving != 0, ]
   result <- result[order(result$Saving, decreasing = TRUE), ]
   return(result)

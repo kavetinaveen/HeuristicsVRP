@@ -4,8 +4,9 @@
 \alias{CW_Parallel_VRP}
 \title{Performs Clarke-Wright Savings algorithm in Parallel}
 \usage{
-CW_Parallel_VRP(Sort_Edge, nnodes, routes = list(), Served_nodes = c(),
-  Filled_Routes = c(), logfile = TRUE, Constraints = c("Capacity"))
+CW_Parallel_VRP(Sort_Edge, nnodes, demand, Vehicle_Capacity, routes = list(),
+  Served_nodes = c(), Filled_Routes = c(), logfile = TRUE,
+  Constraints = c("Capacity"))
 }
 \arguments{
 \item{Sort_Edge}{-- Edges sorted in a decreasing order of their savings}

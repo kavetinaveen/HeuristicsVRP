@@ -4,7 +4,8 @@
 \alias{CheckConstraints}
 \title{Checks whether the constraints satisfied or not}
 \usage{
-CheckConstraints(route, common_node, new_node, Constraints = c("Capacity"))
+CheckConstraints(route, common_node, new_node, demand, Vehicle_Capacity,
+  Constraints = c("Capacity"))
 }
 \arguments{
 \item{route}{-- Sequence of nodes (Ex: 5 4 3 8)}
