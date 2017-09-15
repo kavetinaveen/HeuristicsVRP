@@ -27,5 +27,5 @@ Vehicle_Capacity <- 100
 data(An32k5demand)
 demand <- An32k5demand
 const <- c("Capacity")
-CheckConstraints(route, common_node, new_node, Constraints = const)
+CheckConstraints(route, common_node, new_node, demand, Vehicle_Capacity, Constraints = const)
 }
