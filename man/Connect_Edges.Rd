@@ -22,4 +22,3 @@ common_node <- 5
 new_node <- 9
 Connect_Edges(route, common_node, new_node)
 }
-

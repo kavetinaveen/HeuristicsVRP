@@ -29,4 +29,3 @@ demand <- An32k5demand
 const <- c("Capacity")
 CheckConstraints(route, common_node, new_node, Constraints = const)
 }
-

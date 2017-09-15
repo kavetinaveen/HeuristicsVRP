@@ -16,4 +16,3 @@ CW_Sequential_VRP(Sort_Edge, nnodes, demand, Vehicle_Capacity,
 \description{
 Performs Clarke-Wright Savings algorithm in Sequential
 }
-

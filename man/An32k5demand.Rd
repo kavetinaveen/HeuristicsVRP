@@ -15,4 +15,3 @@ data(An32k5demand)
 Demand data for 31 customer nodes
 }
 \keyword{datasets}
-

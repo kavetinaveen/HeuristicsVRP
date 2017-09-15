@@ -45,4 +45,3 @@ CW_VRP(demand = demand, locations = locations, Vehicle_Capacity = Vehicle_Capaci
 \references{
 [1] Classical Heuristics for Vehicle Routing Problem by Gilbert Laporte and Frederic Semet, October, 1998 (Revised: August, 1999), Les Cahiers du Gerad
 }
-

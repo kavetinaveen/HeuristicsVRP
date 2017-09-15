@@ -1,5 +1,5 @@
 #' Implements Clarke-Wright Savings algorithm to find greedy routes
-#' @param locations -- [ID, X, Y] Node id and X, Y co-ordinates/long, lat 
+#' @param locations -- [ID, X, Y] Node id and X, Y co-ordinates/long, lat
 #' @param demand -- Demand at each node [ID, Demand]
 #' @param DMat -- Provide distance matrix, if you already have computed. Make sure that first row and column of the distance matrix represents distances from depot to all the nodes
 #' @param Vehicle_Capacity -- Vehicle capacity
@@ -18,7 +18,7 @@
 #' demand <- An32k5demand
 #' Vehicle_Capacity <- 100
 #' CW_VRP(demand = demand, locations = locations, Vehicle_Capacity = Vehicle_Capacity)
-#' @references 
+#' @references
 #' [1] Classical Heuristics for Vehicle Routing Problem by Gilbert Laporte and Frederic Semet, October, 1998 (Revised: August, 1999), Les Cahiers du Gerad
 #' @importFrom graphics plot
 #' @import ggplot2
@@ -30,10 +30,12 @@
 CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacity = NULL, method = "euclidean", Constraints = c("Capacity"), type = "Parallel", Plot = TRUE, logfile = TRUE){
   options(expressions = 10000)
   strt <- Sys.time()
-  # flag_idmap <- 0
+  flag_idmap <- 0
   
   if(is.null(locations) & is.null(DMat))
-    stop("Please provide either of distance matrix and locations")
+    stop("Please provide either of distance matrix or locations")
+  
+  if(is.null(locations)) Plot <- FALSE
   
   if(is.null(demand) & "Capacity" %in% Constraints){
     warning("Demand values are not available so neglecting vehicle capacity constraint")
@@ -44,7 +46,8 @@ CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacit
     stop("Please provide vehicle capacity")
   
   if(is.null(DMat)){
-    if(!sum(locations[,1] == c(1:nrow(locations)))){
+    map_ids <- !sum(locations[,1] %in% c(1:nrow(locations)))
+    if(map_ids){
       flag_idmap <- 1
       idmap <- data.frame(OID = locations[,1], NID = c(1:nrow(locations)))
       idmap$OID <- as.character(idmap$OID)
@@ -53,8 +56,6 @@ CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacit
     DMat <- DistMat(locations)
     nnodes <- nrow(locations) - 1
   }else{
-    
-    Plot <- FALSE
     nnodes <- nrow(DMat) - 1
   }
   SMat <- SavingMat(DMat, 1)
@@ -75,12 +76,23 @@ CW_VRP <- function(demand = NULL, locations = NULL, DMat = NULL, Vehicle_Capacit
   cat("Total cost: ", Total_Cost(Greedy_Routes, DMat), "\n")
   
   if(Plot == TRUE){
-    g <- ggplot(locations[unlist(Greedy_Routes), ], aes_string(x = names(locations)[2], y = names(locations)[3])) + geom_path(lineend = "round", linetype = 2, show.legend = TRUE) + labs(title = "Plot of Greedy Routes") + annotate("text", x = locations[, 2], y = locations[, 3], label = idmap$OID)
+    g <- ggplot(locations[unlist(Greedy_Routes), ], aes_string(x = names(locations)[2], y = names(locations)[3])) + geom_path(lineend = "round", linetype = 2, show.legend = TRUE) + labs(title = "Plot of Greedy Routes") 
+    
+    if(exists("idmap")){
+      g <- g + annotate("text", x = locations[, 2], y = locations[, 3], label = idmap$OID)
+    }else{
+      g <- g + annotate("text", x = locations[, 2], y = locations[, 3], label = locations[, 1])
+    }
+    # ifelse(exists("idmap"), idmap$OID,
     plot(g)
   }
   
-  for(i in 1:length(Greedy_Routes)){
-    Greedy_Routes[[i]] <- idmap[Greedy_Routes[[i]], "OID"]
+  if(is.null(DMat)){
+    if(map_ids){
+      for(i in 1:length(Greedy_Routes)){
+        Greedy_Routes[[i]] <- idmap[Greedy_Routes[[i]], "OID"]
+      }
+    }
   }
   
   cat("Total time taken: ", Sys.time() - strt,"\n")

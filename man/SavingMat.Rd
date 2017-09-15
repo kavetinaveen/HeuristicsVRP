@@ -20,4 +20,3 @@ row.names(DMat) <- An32k5locations[, 1]
 colnames(DMat) <- An32k5locations[, 1]
 SavingMat(DMat)
 }
-

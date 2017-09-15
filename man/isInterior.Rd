@@ -20,4 +20,3 @@ node <- 5
 isInterior(c(5, 4, 3, 8), 5) # FALSE
 isInterior(c(5, 4, 3, 8), 4) # TRUE
 }
-

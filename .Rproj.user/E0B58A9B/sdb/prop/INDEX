@@ -1,3 +1,4 @@
+~%2FClarke_Wright_Savings_Algo%2F.Rbuildignore="CCE30E8"
 ~%2FClarke_Wright_Savings_Algo%2FCheckConstraints.R="D466C380"
 ~%2FClarke_Wright_Savings_Algo%2FClarkeWrightSavings.R="A8D6C662"
 ~%2FClarke_Wright_Savings_Algo%2FConnect_Edges.R="DA258C52"
@@ -34,4 +35,7 @@
 ~%2FClarke_Wright_Savings_Algo%2FpackageName%2FNAMESPACE="78F4F4D9"
 ~%2FClarke_Wright_Savings_Algo%2FpackageName%2FR%2FpackageName-internal.R="9E82C8C0"
 ~%2FClarke_Wright_Savings_Algo%2FpackageName%2FRead-and-delete-me="88C01D46"
+~%2FClarke_Wright_Savings_Algo%2Fvignettes%2FResults.txt="50E57C68"
+~%2FClarke_Wright_Savings_Algo%2Fvignettes%2FResults_Seq.txt="25873BEE"
+~%2FClarke_Wright_Savings_Algo%2Fvignettes%2Fintroduction.R="766A2117"
 ~%2FClarke_Wright_Savings_Algo%2Fvignettes%2Fintroduction.Rmd="3F85484B"

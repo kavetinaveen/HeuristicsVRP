@@ -18,4 +18,3 @@ Coomputes distance matrix
 data(An32k5locations)
 DistMat(An32k5locations)
 }
-

@@ -24,4 +24,3 @@ Vehicle_Capacity <- 100
 result <- CW_VRP(demand, DMat = DMat, Vehicle_Capacity = Vehicle_Capacity)
 Total_Cost(result, DMat)
 }
-

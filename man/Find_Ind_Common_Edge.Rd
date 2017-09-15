@@ -14,4 +14,3 @@ Find_Ind_Common_Edge(Sort_Edge, Served_nodes)
 \description{
 To find an index of the sorted edges, in which a common node between routes and existing routes exists. (Only for Sequential approach, internal purpose)
 }
-

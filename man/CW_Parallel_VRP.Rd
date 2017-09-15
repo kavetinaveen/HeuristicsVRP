@@ -16,4 +16,3 @@ CW_Parallel_VRP(Sort_Edge, nnodes, demand, Vehicle_Capacity, routes = list(),
 \description{
 Performs Clarke-Wright Savings algorithm in Parallel
 }
-
