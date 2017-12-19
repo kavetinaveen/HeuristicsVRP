@@ -11,7 +11,7 @@
 #' @examples
 #' data(An32k5locations)
 #' locations <- An32k5locations
-#' DMat <- DistMat(locations)
+#' DMat <- DistMat(locations[, -1])
 #' row.names(DMat) <- locations[, 1]
 #' colnames(DMat) <- locations[, 1]
 #' data(An32k5demand)

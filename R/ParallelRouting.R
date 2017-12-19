@@ -46,7 +46,7 @@ CW_Parallel_VRP <- function(Sort_Edge, nnodes, demand, Vehicle_Capacity, routes 
     CC <- CheckConstraints(routes[[route_id]], CommonNode, NewNode, demand, Vehicle_Capacity, Constraints)
     if(CC$Filled) Filled_Routes <- c(Filled_Routes, route_id)
     
-    # Check whenther including new node to existing route satisfying constraints or not? If it satisfies include new node into route, otherwise delete the first edge and continue
+    # Check whether including new node to existing route satisfying constraints or not? If it satisfies include new node into route, otherwise delete the first edge and continue
     if(CC$Satisfied){
       routes[[route_id]] <- Connect_Edges(route = routes[[route_id]], common_node = CommonNode, new_node = NewNode)
       Served_nodes <- c(Served_nodes, NewNode)
