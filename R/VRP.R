@@ -244,7 +244,7 @@ for(y in 1:(m + n*m)){
 
 ## RHS for inequality
 
-rhs <- rep(0, (2*m + (n+1)*m + n*m + n )
+rhs <- rep(0, (2*m + (n+1)*m + n*m + n ))
 x <- 1
 
 for(y in 1:m){
